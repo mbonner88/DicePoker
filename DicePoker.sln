@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1705.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DicePoker", "DicePoker\DicePoker.csproj", "{0D79DEB6-F559-410B-99C5-D78CBDCBB42A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceTest", "DiceTest\DiceTest.csproj", "{887CCAB7-5511-491B-98AA-9A2B02A035C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D79DEB6-F559-410B-99C5-D78CBDCBB42A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D79DEB6-F559-410B-99C5-D78CBDCBB42A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D79DEB6-F559-410B-99C5-D78CBDCBB42A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D79DEB6-F559-410B-99C5-D78CBDCBB42A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{887CCAB7-5511-491B-98AA-9A2B02A035C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{887CCAB7-5511-491B-98AA-9A2B02A035C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{887CCAB7-5511-491B-98AA-9A2B02A035C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{887CCAB7-5511-491B-98AA-9A2B02A035C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1556887D-9448-4708-A710-DD83C6ACFF67}
+	EndGlobalSection
+EndGlobal
