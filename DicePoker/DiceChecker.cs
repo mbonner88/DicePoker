@@ -5,6 +5,10 @@ namespace DicePoker
 	{
         public static string CheckDice(int[] dice)
         {
+            for(int i = 0; i < dice.Length; i++)
+            {
+                Console.WriteLine($"Die {i+1} : {dice[i]}");
+            }
             if (FiveOfAKind(dice)) return "Five of a Kind";
             if (FourOfAKind(dice)) return "Four of a Kind";
             if (FullHouse(dice)) return "Full House";
@@ -42,20 +46,6 @@ namespace DicePoker
             return false;
         }
 
-        public static bool ThreeOfAKind(int[] dice)
-        {
-            for (int i = 0; i < dice.Length; i++)
-            {
-                int count = 1;
-                for (int j = i + 1; j < dice.Length; j++)
-                {
-                    if (dice[i] == dice[j]) count++;
-                }
-                if (count == 3) return true;
-            }
-            return false;
-        }
-
         public static bool FullHouse(int[] dice)
         {
             if (ThreeOfAKind(dice) && Pair(dice)) return true;
@@ -82,6 +72,20 @@ namespace DicePoker
                 if (sortedDice[i] != sortedDice[i - 1] + 1) return false;
             }
             return true;
+        }
+
+        public static bool ThreeOfAKind(int[] dice)
+        {
+            for (int i = 0; i < dice.Length; i++)
+            {
+                int count = 1;
+                for (int j = i + 1; j < dice.Length; j++)
+                {
+                    if (dice[i] == dice[j]) count++;
+                }
+                if (count == 3) return true;
+            }
+            return false;
         }
 
         public static bool TwoPairs(int[] dice)
