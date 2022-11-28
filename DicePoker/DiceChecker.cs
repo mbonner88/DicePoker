@@ -1,25 +1,25 @@
 ﻿using System;
 namespace DicePoker
 {
-	public static class DiceChecker
-	{
-        public static string CheckDice(int[] dice)
+    public static class DiceChecker
+    {
+        public static DiceHand CheckDice(int[] dice)
         {
-            for(int i = 0; i < dice.Length; i++)
+            for (int i = 0; i < dice.Length; i++)
             {
-                Console.WriteLine($"Die {i+1} : {dice[i]}");
+                Console.WriteLine($"Die {i + 1} : {dice[i]}");
             }
-            if (FiveOfAKind(dice)) return "Five of a Kind";
-            if (FourOfAKind(dice)) return "Four of a Kind";
-            if (FullHouse(dice)) return "Full House";
-            if (SixHighStraight(dice)) return "Six High Straight";
-            if (FiveHighStraight(dice)) return "Five High Straight";
-            if (ThreeOfAKind(dice)) return "Three of a Kind";
-            if (TwoPairs(dice)) return "Two Pairs";
-            if (Pair(dice)) return "Pair";
-            return "Nothing...";
+            if (FiveOfAKind(dice)) return DiceHand.FiveOfAKind;
+            if (FourOfAKind(dice)) return DiceHand.FourOfAKind;
+            if (FullHouse(dice)) return DiceHand.FullHouse;
+            if (SixHighStraight(dice)) return DiceHand.SixHighStraight;
+            if (FiveHighStraight(dice)) return DiceHand.FiveHighStraight;
+            if (ThreeOfAKind(dice)) return DiceHand.ThreeOfAKind;
+            if (TwoPairs(dice)) return DiceHand.TwoPairs;
+            if (Pair(dice)) return DiceHand.Pair;
+            return DiceHand.Nothing;          
         }
-
+       
         public static bool FiveOfAKind(int[] dice)
         {
             for (int i = 1; i < dice.Length; i++)
