@@ -1,7 +1,9 @@
-﻿namespace DicePoker;
+﻿using System.Text.RegularExpressions;
+
+namespace DicePoker;
 class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
         Console.WriteLine("Welcome to dice poker. Here is your hand...");
         var rnd = new Random();
@@ -12,33 +14,7 @@ class Program
         var opponentDice = DiceDealer.RollDice(rnd).ToArray();
         var opponentHand = DiceChecker.CheckDice(opponentDice);
 
-        Console.WriteLine("Would you like to reroll some dice?");
-        Console.WriteLine("1. Yes.");
-        Console.WriteLine("2. No.");
-        string userInput;
-        while (true)
-        {
-            userInput = Console.ReadLine();
-            if (userInput != "1" && userInput != "2")
-            {
-                Console.WriteLine("Invalid input. Please enter a 1 or a 2.");
-                continue;
-            }
-            else if (userInput == "1")
-            {
-                Console.WriteLine("Enter the numbers of the dice you would like to reroll:");
-                string rerollInput = Console.ReadLine();
-                playerDice = DiceDealer.RerollDice(rerollInput, playerDice, rnd);
-                Console.WriteLine("Your new hand...");
-                playerHand = DiceChecker.CheckDice(playerDice);
-                break;
-            }
-            else if (userInput == "2")
-            {
-                //compare
-                break;
-            }
-        }
+        DiceDealer.RerollPrompt(playerDice, playerHand);
 
         Console.WriteLine("Opponent's turn...");
         opponentDice = DiceOpponent.OpponentReroll(opponentDice, opponentHand);
@@ -56,18 +32,6 @@ class Program
         }
         else Console.WriteLine("The match ends in a draw.");
 
-        Console.WriteLine("Play again?");
-        Console.WriteLine("1. Yes.");
-        Console.WriteLine("2. No.");
-        while (true)
-        {
-            userInput = Console.ReadLine();
-            if (userInput != "1" && userInput != "2")
-            {
-                Console.WriteLine("Invalid input. Please enter a 1 or a 2.");
-            }
-            else if (userInput == "1") Main(args);
-            else break;
-        }
+        DiceDealer.ReplayPrompt();
     }
 }
