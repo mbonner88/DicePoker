@@ -5,7 +5,41 @@ namespace DicePoker
 {
 	public static class DiceDealer
 	{
-        
+        public static int Welcome(DicePlayer player, int pool)
+        {
+            Console.WriteLine($"Welcome to dice poker. Place your starting bet.\nYou have {player.Coins} coins.\n1. 10 coins.\n2. 25 coins.\n3. 50 coins.");
+            string userInput;
+            while (true)
+            {
+                userInput = Console.ReadLine();
+                if(userInput != "1" && userInput != "2" && userInput != "3")
+                {
+                    Console.WriteLine("Invalid input. Please enter a 1, 2, or a 3.");
+                }
+                else if(userInput == "1")
+                {
+                    player.Coins -= 10;
+                    pool += 20;
+                    Console.WriteLine($"This round's pool starts off at {pool} coins.");
+                    return pool;
+                }
+                else if(userInput == "2")
+                {
+                    player.Coins -= 25;
+                    pool += 50;
+                    Console.WriteLine($"This round's pool starts off at {pool} coins.");
+                    return pool;
+                }
+                else if(userInput == "3")
+                {
+                    player.Coins -= 50;
+                    pool += 100;
+                    Console.WriteLine($"This round's pool starts off at {pool} coins.");
+                    return pool;
+                }                
+            }
+        }
+
         public static IEnumerable<int> RollDice(Random rnd)
         {
             for (int i = 0; i < 5; i++)
@@ -26,9 +60,7 @@ namespace DicePoker
 
         public static void RerollPrompt(int[] dice, DiceHand playerHand)
         {
-            Console.WriteLine("Would you like to reroll some dice?");
-            Console.WriteLine("1. Yes.");
-            Console.WriteLine("2. No.");
+            Console.WriteLine("Would you like to reroll some dice?\n1. Yes.\n2. No.");
             string userInput;
             while (true)
             {
@@ -54,6 +86,7 @@ namespace DicePoker
                     }
                     dice = DiceDealer.RerollDice(rerollInput, dice, new Random());
                     Console.WriteLine("Your new hand...");
+                    DiceChecker.PrintDice(dice);
                     playerHand = DiceChecker.CheckDice(dice);
                     break;
                 }
@@ -65,11 +98,9 @@ namespace DicePoker
             return;
         }
 
-        public static void ReplayPrompt()
+        public static void BettingPrompt(DicePlayer player, ref int pool)
         {
-            Console.WriteLine("Play again?");
-            Console.WriteLine("1. Yes.");
-            Console.WriteLine("2. No.");
+            Console.WriteLine("Would you like to place a bet?\n1. Yes.\n2. No.");
             string userInput;
             while (true)
             {
@@ -78,8 +109,68 @@ namespace DicePoker
                 {
                     Console.WriteLine("Invalid input. Please enter a 1 or a 2.");
                 }
-                else if (userInput == "1") Program.Main(new string[0]);
+                else if (userInput == "1")
+                {
+                    DiceDealer.PlaceBet(player, ref pool);
+                    break;
+                }
                 else break;
+            }
+        }
+
+        public static DicePlayer PlaceBet(DicePlayer player, ref int pool)
+        {
+            Console.WriteLine($"Select amount of coins to bet. You currently have {player.Coins}:\n1. 10 coins.\n2. 25 coins.\n3. 50 coins.");
+            string userInput;
+            while (true)
+            {
+                userInput = Console.ReadLine();
+                if (userInput != "1" && userInput != "2" && userInput != "3")
+                {
+                    Console.WriteLine("Invalid input. Please enter a 1, 2, or a 3.");                    
+                }
+                else if (userInput == "1")
+                {
+                    player.Coins -= 10;
+                    pool += 20;
+                    Console.WriteLine($"Betting 10 coins. The pool has {pool} coins and your pockets now have {player.Coins}");
+                    return player;
+                }
+                else if (userInput == "2")
+                {
+                    player.Coins -= 25;
+                    pool += 50;
+                    Console.WriteLine($"Betting 25 coins. The pool has {pool} coins and your pockets now have {player.Coins}");
+                    return player;
+                }
+                else if (userInput == "3")
+                {
+                    player.Coins -= 50;
+                    pool += 100;
+                    Console.WriteLine($"Betting 50 coins. The pool has {pool} coins and your pockets now have {player.Coins}");
+                    return player;
+                }
+            }
+        }
+
+        public static void ReplayPrompt(DicePlayer player)
+        {
+            Console.WriteLine("Play again?\n1. Yes.\n2. No.");
+            string userInput;
+            while (true)
+            {
+                userInput = Console.ReadLine();
+                if (userInput != "1" && userInput != "2")
+                {
+                    Console.WriteLine("Invalid input. Please enter a 1 or a 2.");
+                    continue;
+                }
+                else if (userInput == "1") Program.Game(player);
+                else
+                {
+                    Console.WriteLine($"Thank you for playing. You won {player.RoundsWon} games and {player.Coins} coins.");
+                    break;
+                }
             }
             return;
         }

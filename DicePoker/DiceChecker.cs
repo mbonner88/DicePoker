@@ -5,10 +5,7 @@ namespace DicePoker
     {
         public static DiceHand CheckDice(int[] dice)
         {
-            for (int i = 0; i < dice.Length; i++)
-            {
-                Console.WriteLine($"Die {i + 1} : {dice[i]}");
-            }
+            //DiceChecker.PrintDice(dice);
             if (FiveOfAKind(dice)) return DiceHand.FiveOfAKind;
             if (FourOfAKind(dice)) return DiceHand.FourOfAKind;
             if (FullHouse(dice)) return DiceHand.FullHouse;
@@ -18,6 +15,20 @@ namespace DicePoker
             if (TwoPairs(dice)) return DiceHand.TwoPairs;
             if (Pair(dice)) return DiceHand.Pair;
             return DiceHand.Nothing;          
+        }
+
+        public static void PrintDice(int[] dice)
+        {
+            for (int i = 0; i < dice.Length; i++)
+            {
+                Console.WriteLine($"Die {i + 1} : {dice[i]}");
+            }
+        }
+
+        public static void PrintHands(DiceHand playerHand, DiceHand opponentHand)
+        {
+            Console.WriteLine($"Your hand: {playerHand}");
+            Console.WriteLine($"Opponent's hand: {opponentHand}");
         }
        
         public static bool FiveOfAKind(int[] dice)

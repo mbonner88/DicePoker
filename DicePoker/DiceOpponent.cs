@@ -14,17 +14,22 @@ namespace DicePoker
 					rerollInput += Array.IndexOf(dice, die) + 1;
 				}
 				Console.WriteLine($"Opponent rerolling dice {rerollInput}");
-				return DiceDealer.RerollDice(rerollInput, dice, new Random());
+				int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
+				Console.WriteLine("Opponent's new hand...");
+				DiceChecker.PrintDice(newDice);
+				return newDice;
 			}
 			else if ((int)hand == 7)
 			{
 				string rerollInput = Array.IndexOf(dice, dice.Distinct()).ToString();
-				return DiceDealer.RerollDice(rerollInput, dice, new Random());
-			}
+                Console.WriteLine($"Opponent rerolling dice {rerollInput}");
+                int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
+                Console.WriteLine("Opponent's new hand...");
+                DiceChecker.PrintDice(newDice);
+                return newDice;
+            }
 			return dice;
-		}
-
-		//opponent betting
+		}		
 	}
 }
 
