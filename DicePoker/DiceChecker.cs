@@ -5,7 +5,6 @@ namespace DicePoker
     {
         public static DiceHand CheckDice(int[] dice)
         {
-            //DiceChecker.PrintDice(dice);
             if (FiveOfAKind(dice)) return DiceHand.FiveOfAKind;
             if (FourOfAKind(dice)) return DiceHand.FourOfAKind;
             if (FullHouse(dice)) return DiceHand.FullHouse;
@@ -27,8 +26,8 @@ namespace DicePoker
 
         public static void PrintHands(DiceHand playerHand, DiceHand opponentHand)
         {
-            Console.WriteLine($"Your hand: {playerHand}");
-            Console.WriteLine($"Opponent's hand: {opponentHand}");
+            Console.WriteLine($"Your hand: {Program.SeparateDiceHandString(playerHand)}");
+            Console.WriteLine($"Opponent's hand: {Program.SeparateDiceHandString(opponentHand)}");
         }
        
         public static bool FiveOfAKind(int[] dice)

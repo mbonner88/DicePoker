@@ -13,7 +13,7 @@ namespace DicePoker
 				{
 					rerollInput += Array.IndexOf(dice, die) + 1;
 				}
-				Console.WriteLine($"Opponent rerolling dice {rerollInput}");
+				Console.WriteLine($"Opponent rerolling dice {Program.SeparateRerollString(rerollInput)}");
 				int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
 				Console.WriteLine("Opponent's new hand...");
 				DiceChecker.PrintDice(newDice);
@@ -22,14 +22,16 @@ namespace DicePoker
 			else if ((int)hand == 7)
 			{
 				string rerollInput = Array.IndexOf(dice, dice.Distinct()).ToString();
-                Console.WriteLine($"Opponent rerolling dice {rerollInput}");
+                Console.WriteLine($"Opponent rerolling dice {Program.SeparateRerollString(rerollInput)}");
                 int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
                 Console.WriteLine("Opponent's new hand...");
                 DiceChecker.PrintDice(newDice);
                 return newDice;
             }
 			return dice;
-		}		
+		}
+
+		//TODO: opponent betting logic
 	}
 }
 
