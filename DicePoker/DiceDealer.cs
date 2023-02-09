@@ -170,7 +170,8 @@ namespace DicePoker
                 else if (userInput == "1") Program.Game(player);
                 else
                 {
-                    Console.WriteLine($"Thank you for playing. You won {player.RoundsWon} games and {player.Coins} coins.");
+                    //TODO: coins won/lost
+                    Console.WriteLine($"Thank you for playing. You won {player.RoundsWon} games and {player.Coins - 500} coins.");
                     break;
                 }
             }

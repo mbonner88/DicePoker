@@ -22,12 +22,13 @@ namespace DicePoker
 			else if ((int)hand == 7)
 			{
 				string rerollInput = Array.IndexOf(dice, dice.Distinct()).ToString();
-                Console.WriteLine($"Opponent rerolling dice {Program.SeparateRerollString(rerollInput)}");
+                Console.WriteLine($"Opponent rerolling die {rerollInput}");
                 int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
                 Console.WriteLine("Opponent's new hand...");
                 DiceChecker.PrintDice(newDice);
                 return newDice;
             }
+			Console.WriteLine("Opponent declined rerolling any dice.");
 			return dice;
 		}
 
