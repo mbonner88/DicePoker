@@ -1,9 +1,9 @@
 ﻿namespace DiceTest;
 
 
-public class UnitTest1
+public class DiceCheckerTest
 {
-    //TODO: more tests
+    //TODO: more tests here, create more test classes for dealer,
     [Fact]
     public void FourOfAKindTest()
     {

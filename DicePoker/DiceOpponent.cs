@@ -1,8 +1,15 @@
 ﻿using System;
 namespace DicePoker
 {
-	public static class DiceOpponent
+	public class DiceOpponent
 	{
+		/*store props here? dice, hand, coins, roundswon
+		 make class nonstatic, keep methods static*/
+		public int[] OpponentDice { get; set; }
+		public DiceHand OpponentHand { get; set; }
+		public int OpponentCoins { get; set; }
+		public int OpponentWins { get; set; }
+
 		public static int[] OpponentReroll(int[] dice, DiceHand hand)
 		{
 			if((int)hand < 4)

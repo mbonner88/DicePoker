@@ -6,10 +6,11 @@ class Program
     public static void Main(string[] args)
     {
         var player = new DicePlayer();
-        Game(player);
+        var opponent = new DiceOpponent();
+        Game(player, opponent);
     }
 
-    public static void Game(DicePlayer player)
+    public static void Game(DicePlayer player, DiceOpponent opponent)
     {
         //TODO: add some Thread.Sleep
         var rnd = new Random();
@@ -19,36 +20,40 @@ class Program
         Console.WriteLine("Press enter to roll the dice.");
         Console.ReadKey();
         Console.WriteLine("Here is your hand...");
-        var playerDice = DiceDealer.RollDice(rnd).ToArray();
-        var playerHand = DiceChecker.CheckDice(playerDice);
-        DiceChecker.PrintDice(playerDice);
+        
+        player.PlayerDice = DiceDealer.RollDice(rnd).ToArray();
+        player.PlayerHand = DiceChecker.CheckDice(player.PlayerDice);
+        DiceChecker.PrintDice(player.PlayerDice);
         Console.WriteLine();
 
         Console.WriteLine("And your opponent's hand...");
-        var opponentDice = DiceDealer.RollDice(rnd).ToArray();
-        var opponentHand = DiceChecker.CheckDice(opponentDice);
-        DiceChecker.PrintDice(opponentDice);
+        opponent.OpponentDice = DiceDealer.RollDice(rnd).ToArray();
+        opponent.OpponentHand = DiceChecker.CheckDice(opponent.OpponentDice);
+        DiceChecker.PrintDice(opponent.OpponentDice);
         Console.WriteLine();
 
-        DiceChecker.PrintHands(playerHand, opponentHand);
+        DiceChecker.PrintHands(player.PlayerHand, opponent.OpponentHand);
+        //second bet after the reroll rather than before?
         DiceDealer.BettingPrompt(player, ref pool);
 
-        DiceDealer.RerollPrompt(playerDice, ref playerHand);
+        //took out a ref
+        DiceDealer.RerollPrompt(player);
 
         Console.WriteLine("Opponent's turn...");
-        opponentDice = DiceOpponent.OpponentReroll(opponentDice, opponentHand);
-        opponentHand = DiceChecker.CheckDice(opponentDice);
+        opponent.OpponentDice = DiceOpponent.OpponentReroll(opponent.OpponentDice, opponent.OpponentHand);
+        opponent.OpponentHand = DiceChecker.CheckDice(opponent.OpponentDice);
 
-        DiceChecker.PrintHands(playerHand, opponentHand);
-        if ((int)playerHand > (int)opponentHand)
+        DiceChecker.PrintHands(player.PlayerHand, opponent.OpponentHand);
+        //write a method for dicechecker.checkhands?
+        if ((int)player.PlayerHand > (int)opponent.OpponentHand)
         {
-            player.RoundsWon++;
+            player.PlayerWins++;
             player.Coins += pool;
             Console.WriteLine($"You've won! {pool} coins added!");
         }
-        else if ((int)playerHand < (int)opponentHand)
+        else if ((int)player.PlayerHand < (int)opponent.OpponentHand)
         {
-            Console.WriteLine($"You've lost... {pool / 2} coins removed.");
+            Console.WriteLine($"You've lost... {pool / 2} coins spent.");
         }
         //TODO: ranking similar hands
         else
@@ -57,10 +62,10 @@ class Program
             Console.WriteLine($"The match ends in a draw. {pool / 2} coins refunded.");
         }
 
-        Console.WriteLine($"{player.Coins}");
-        DiceDealer.ReplayPrompt(player);
+        Console.WriteLine($"{player.Coins} coins remaining.");
+        DiceDealer.ReplayPrompt(player, opponent);
     }
-
+    //probably put these in dealer 
     public static string SeparateRerollString(string input)
     {
         string output = "";

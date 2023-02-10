@@ -5,7 +5,7 @@ VisualStudioVersion = 25.0.1705.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DicePoker", "DicePoker\DicePoker.csproj", "{0D79DEB6-F559-410B-99C5-D78CBDCBB42A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceTest", "DiceTest\DiceTest.csproj", "{887CCAB7-5511-491B-98AA-9A2B02A035C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DicePokerTest", "DiceTest\DicePokerTest.csproj", "{887CCAB7-5511-491B-98AA-9A2B02A035C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

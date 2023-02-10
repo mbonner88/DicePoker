@@ -20,16 +20,36 @@ namespace DicePoker
         {
             for (int i = 0; i < dice.Length; i++)
             {
-                Console.WriteLine($"Die {i + 1} : {dice[i]}");
+                Console.WriteLine("{0,40}", $"Die {i + 1} : {dice[i]}");
             }
         }
 
+        //CheckHands
+        //public static bool CheckHands(DicePlayer player, DiceOpponent opponent)
+        //{
+        //    if ((int)playerHand > (int)opponentHand) return true;
+        //    else if ((int)playerHand < (int)opponentHand) return false;
+        //    else TieBreaker();
+        //}
+        
         public static void PrintHands(DiceHand playerHand, DiceHand opponentHand)
         {
             Console.WriteLine($"Your hand: {Program.SeparateDiceHandString(playerHand)}");
             Console.WriteLine($"Opponent's hand: {Program.SeparateDiceHandString(opponentHand)}");
         }
-       
+
+        //TieBreaker
+        //public static bool TieBreaker()
+        //{
+
+        //}
+
+        //CheckHighPair
+
+        //CheckLowPair
+
+        //CheckKicker
+
         public static bool FiveOfAKind(int[] dice)
         {
             for (int i = 1; i < dice.Length; i++)

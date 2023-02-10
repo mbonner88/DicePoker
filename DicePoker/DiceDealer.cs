@@ -59,7 +59,8 @@ namespace DicePoker
             return dice;
         }
 
-        public static void RerollPrompt(int[] dice, ref DiceHand playerHand)
+        //took out a ref
+        public static void RerollPrompt(DicePlayer player)
         {
             Console.WriteLine("Would you like to reroll some dice?\n1. Yes.\n2. No.");
             string userInput;
@@ -73,7 +74,8 @@ namespace DicePoker
                 }
                 else if (userInput == "1")
                 {
-                    Console.WriteLine("Enter the numbers of the dice you would like to reroll:");
+                    Console.WriteLine("Enter the numbers corresponding to the dice you would like to reroll:");
+                    Console.WriteLine("(For example, to reroll the first, third, and fifth dice, enter 135)");
                     string rerollInput;
                     while (true)
                     {
@@ -86,10 +88,10 @@ namespace DicePoker
                         }
                     }
                     Console.WriteLine($"Rerolling dice {Program.SeparateRerollString(rerollInput)}");
-                    dice = DiceDealer.RerollDice(rerollInput, dice, new Random());
+                    player.PlayerDice = DiceDealer.RerollDice(rerollInput, player.PlayerDice, new Random());
                     Console.WriteLine("Your new hand...");
-                    DiceChecker.PrintDice(dice);
-                    playerHand = DiceChecker.CheckDice(dice);
+                    DiceChecker.PrintDice(player.PlayerDice);
+                    player.PlayerHand = DiceChecker.CheckDice(player.PlayerDice);
                     break;
                 }
                 else if (userInput == "2")
@@ -155,7 +157,7 @@ namespace DicePoker
             }
         }
 
-        public static void ReplayPrompt(DicePlayer player)
+        public static void ReplayPrompt(DicePlayer player, DiceOpponent opponent)
         {
             Console.WriteLine("Play again?\n1. Yes.\n2. No.");
             string userInput;
@@ -167,11 +169,12 @@ namespace DicePoker
                     Console.WriteLine("Invalid input. Please enter a 1 or a 2.");
                     continue;
                 }
-                else if (userInput == "1") Program.Game(player);
+                else if (userInput == "1") Program.Game(player, opponent);
                 else
                 {
-                    //TODO: coins won/lost
-                    Console.WriteLine($"Thank you for playing. You won {player.RoundsWon} games and {player.Coins - 500} coins.");
+                    //TODO: coins won/lost currently can send balance into negative
+                    //minus 500 here is to compensate for the starting balance
+                    Console.WriteLine($"Thank you for playing. You won {player.PlayerWins} game(s) and {player.Coins - 500} coins.");
                     break;
                 }
             }
