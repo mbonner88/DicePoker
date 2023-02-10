@@ -59,7 +59,6 @@ namespace DicePoker
             return dice;
         }
 
-        //took out a ref
         public static void RerollPrompt(DicePlayer player)
         {
             Console.WriteLine("Would you like to reroll some dice?\n1. Yes.\n2. No.");

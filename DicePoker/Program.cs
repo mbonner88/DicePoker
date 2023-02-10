@@ -35,8 +35,7 @@ class Program
         DiceChecker.PrintHands(player.PlayerHand, opponent.OpponentHand);
         //second bet after the reroll rather than before?
         DiceDealer.BettingPrompt(player, ref pool);
-
-        //took out a ref
+        
         DiceDealer.RerollPrompt(player);
 
         Console.WriteLine("Opponent's turn...");
@@ -53,7 +52,8 @@ class Program
         }
         else if ((int)player.PlayerHand < (int)opponent.OpponentHand)
         {
-            Console.WriteLine($"You've lost... {pool / 2} coins spent.");
+            opponent.OpponentWins++;
+            Console.WriteLine($"You've lost... {pool} coins awarded to your opponent.");
         }
         //TODO: ranking similar hands
         else
