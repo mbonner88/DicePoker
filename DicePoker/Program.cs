@@ -65,7 +65,7 @@ class Program
         Console.WriteLine($"{player.Coins} coins remaining.");
         DiceDealer.ReplayPrompt(player, opponent);
     }
-    //probably put these in dealer 
+    //probably put these in dealer. or extension methods static class
     public static string SeparateRerollString(string input)
     {
         string output = "";
