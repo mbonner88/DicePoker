@@ -43,24 +43,27 @@ class Program
         opponent.OpponentHand = DiceChecker.CheckDice(opponent.OpponentDice);
 
         DiceChecker.PrintHands(player.PlayerHand, opponent.OpponentHand);
+
         //write a method for dicechecker.checkhands?
-        if ((int)player.PlayerHand > (int)opponent.OpponentHand)
-        {
-            player.PlayerWins++;
-            player.Coins += pool;
-            Console.WriteLine($"You've won! {pool} coins added!");
-        }
-        else if ((int)player.PlayerHand < (int)opponent.OpponentHand)
-        {
-            opponent.OpponentWins++;
-            Console.WriteLine($"You've lost... {pool} coins awarded to your opponent.");
-        }
-        //TODO: ranking similar hands
-        else
-        {
-            player.Coins += pool / 2;
-            Console.WriteLine($"The match ends in a draw. {pool / 2} coins refunded.");
-        }
+        //if ((int)player.PlayerHand > (int)opponent.OpponentHand)
+        //{
+        //    player.PlayerWins++;
+        //    player.Coins += pool;
+        //    Console.WriteLine($"You've won! {pool} coins added!");
+        //}
+        //else if ((int)player.PlayerHand < (int)opponent.OpponentHand)
+        //{
+        //    opponent.OpponentWins++;
+        //    Console.WriteLine($"You've lost... {pool} coins awarded to your opponent.");
+        //}
+        ////TODO: ranking similar hands
+        //else
+        //{
+        //    player.Coins += pool / 2;
+        //    Console.WriteLine($"The match ends in a draw. {pool / 2} coins refunded.");
+        //}
+
+        DiceChecker.CheckHands(player, opponent);
 
         Console.WriteLine($"{player.Coins} coins remaining.");
         DiceDealer.ReplayPrompt(player, opponent);

@@ -5,6 +5,16 @@ public class DiceCheckerTest
 {
     //TODO: more tests here, create more test classes for dealer,
     [Fact]
+    public void CheckHandsTest()
+    {
+        var expected = true;
+        var actual = DiceChecker.CheckHands(new DicePlayer { PlayerDice = new int[] { 6, 6, 4, 4, 2 }, PlayerHand = DiceHand.TwoPairs },
+            new DiceOpponent { OpponentDice = new int[] { 6, 6, 4, 4, 1 }, OpponentHand = DiceHand.TwoPairs });
+        Assert.Equal(expected, actual);
+        
+    }
+
+    [Fact]
     public void FourOfAKindTest()
     {
         //Arrange

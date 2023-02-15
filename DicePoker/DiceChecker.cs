@@ -25,13 +25,22 @@ namespace DicePoker
         }
 
         //CheckHands
-        //public static bool CheckHands(DicePlayer player, DiceOpponent opponent)
-        //{
-        //    if ((int)playerHand > (int)opponentHand) return true;
-        //    else if ((int)playerHand < (int)opponentHand) return false;
-        //    else TieBreaker();
-        //}
-        
+        public static bool CheckHands(DicePlayer player, DiceOpponent opponent)
+        {
+            if ((int)player.PlayerHand > (int)opponent.OpponentHand)
+            {
+                Console.WriteLine($"Well done!");
+                player.PlayerWins++;
+                return true;
+            }
+            else if ((int)player.PlayerHand < (int)opponent.OpponentHand)
+            {
+                Console.WriteLine($"Too bad...");
+                return false;
+            }
+            else return TieBreaker(player, opponent);
+        }
+
         public static void PrintHands(DiceHand playerHand, DiceHand opponentHand)
         {
             Console.WriteLine($"Your hand: {Program.SeparateDiceHandString(playerHand)}");
@@ -39,16 +48,71 @@ namespace DicePoker
         }
 
         //TieBreaker
-        //public static bool TieBreaker()
-        //{
-
-        //}
+        public static bool TieBreaker(DicePlayer player, DiceOpponent opponent)
+        {
+            return CheckHighPair(player, opponent);
+        }
 
         //CheckHighPair
+        public static bool CheckHighPair(DicePlayer player, DiceOpponent opponent)
+        {
+            var playerHighPair = player.PlayerDice.GroupBy(x => x).Where(g => g.Count() > 1).Select(g => g.Key).Max();
+            var opponentHighPair = opponent.OpponentDice.GroupBy(x => x).Where(g => g.Count() > 1).Select(g => g.Key).Max();
+            if (playerHighPair > opponentHighPair)
+            {
+                Console.WriteLine($"Good job!");
+                player.PlayerWins++;
+                return true;
+            }
+            else if (playerHighPair < opponentHighPair)
+            {
+                Console.WriteLine($"Better luck next time...");
+                return false;
+            }
+            else return CheckLowPair(player, opponent);
+        }
 
         //CheckLowPair
+        public static bool CheckLowPair(DicePlayer player, DiceOpponent opponent)
+        {
+            var playerLowPair = player.PlayerDice.GroupBy(x => x).Where(g => g.Count() > 1).Select(g => g.Key).Min();
+            var opponentLowPair = opponent.OpponentDice.GroupBy(x => x).Where(g => g.Count() > 1).Select(g => g.Key).Min();
+            if (playerLowPair > opponentLowPair)
+            {
+                Console.WriteLine($"Nice!");
+                player.PlayerWins++;
+                return true;
+            }
+            else if (playerLowPair < opponentLowPair)
+            {
+                Console.WriteLine($"Crap...");
+                return false;
+            }
+            else return CheckKicker(player, opponent);
+        }
 
         //CheckKicker
+        public static bool CheckKicker(DicePlayer player, DiceOpponent opponent)
+        {
+            var playerHighKicker = player.PlayerDice.GroupBy(x => x).Where(g => g.Count() == 1).Select(g => g.Key).Max();
+            var opponentHighKicker = opponent.OpponentDice.GroupBy(x => x).Where(g => g.Count() == 1).Select(g => g.Key).Max();
+            if (playerHighKicker > opponentHighKicker)
+            {
+                Console.WriteLine($"Lucky!");
+                player.PlayerWins++;
+                return true;
+            }
+            else if (playerHighKicker < opponentHighKicker)
+            {
+                Console.WriteLine($"Close but not cigar...");
+                return false;
+            }
+            else
+            {
+                Console.WriteLine($"Tie game");
+                return false;
+            }
+        }
 
         public static bool FiveOfAKind(int[] dice)
         {

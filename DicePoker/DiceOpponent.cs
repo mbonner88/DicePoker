@@ -4,8 +4,10 @@ namespace DicePoker
 	public class DiceOpponent
 	{
 		/*store props here? dice, hand, coins, roundswon
-		 make class nonstatic, keep methods static*/
-		public int[] OpponentDice { get; set; }
+		 make class nonstatic, keep methods static
+		 primary objective of draining opponent balance to 0
+		 secondary objectives on the way*/
+		public int[]? OpponentDice { get; set; }
 		public DiceHand OpponentHand { get; set; }
 		public int OpponentCoins { get; set; }
 		public int OpponentWins { get; set; }
