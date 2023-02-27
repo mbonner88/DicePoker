@@ -4,9 +4,8 @@ namespace DicePoker
 	public class DiceOpponent
 	{
 		/*store props here? dice, hand, coins, roundswon
-		 make class nonstatic, keep methods static
-		 primary objective of draining opponent balance to 0
-		 secondary objectives on the way*/
+		 make class nonstatic, keep methods static*/
+		 
 		public int[]? OpponentDice { get; set; }
 		public DiceHand OpponentHand { get; set; }
 		public int OpponentCoins { get; set; }
@@ -30,7 +29,12 @@ namespace DicePoker
 			}
 			else if ((int)hand == 7)
 			{
-				string rerollInput = Array.IndexOf(dice, dice.Distinct()).ToString();
+                string rerollInput = "";
+                var rerollDice = dice.GroupBy(x => x).Where(x => x.Count() == 1).Select(x => x.Key);
+                foreach (var die in rerollDice)
+                {
+                    rerollInput += Array.IndexOf(dice, die) + 1;
+                }
                 Console.WriteLine($"Opponent rerolling die {rerollInput}");
                 int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
                 Console.WriteLine("Opponent's new hand...");

@@ -30,7 +30,7 @@ namespace DicePoker
             if ((int)player.PlayerHand > (int)opponent.OpponentHand)
             {
                 Console.WriteLine($"Well done!");
-                player.PlayerWins++;
+                player.PlayerWin();
                 return true;
             }
             else if ((int)player.PlayerHand < (int)opponent.OpponentHand)
@@ -61,7 +61,7 @@ namespace DicePoker
             if (playerHighPair > opponentHighPair)
             {
                 Console.WriteLine($"Good job!");
-                player.PlayerWins++;
+                player.PlayerWin();
                 return true;
             }
             else if (playerHighPair < opponentHighPair)
@@ -80,7 +80,7 @@ namespace DicePoker
             if (playerLowPair > opponentLowPair)
             {
                 Console.WriteLine($"Nice!");
-                player.PlayerWins++;
+                player.PlayerWin();
                 return true;
             }
             else if (playerLowPair < opponentLowPair)
@@ -99,7 +99,7 @@ namespace DicePoker
             if (playerHighKicker > opponentHighKicker)
             {
                 Console.WriteLine($"Lucky!");
-                player.PlayerWins++;
+                player.PlayerWin();
                 return true;
             }
             else if (playerHighKicker < opponentHighKicker)
