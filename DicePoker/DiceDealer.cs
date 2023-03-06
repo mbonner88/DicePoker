@@ -7,7 +7,7 @@ namespace DicePoker
 	{
         public static int Welcome(DicePlayer player, int pool)
         {
-            //TODO:player instructions
+            //TODO:more player instructions
             Console.WriteLine($"Welcome to dice poker. Place your starting bet.\nYou have {player.Coins} coins.\n1. 10 coins.\n2. 25 coins.\n3. 50 coins.");
             string userInput;
             while (true)

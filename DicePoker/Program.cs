@@ -56,7 +56,7 @@ class Program
         //    opponent.OpponentWins++;
         //    Console.WriteLine($"You've lost... {pool} coins awarded to your opponent.");
         //}
-        ////TODO: ranking similar hands
+        ////
         //else
         //{
         //    player.Coins += pool / 2;
