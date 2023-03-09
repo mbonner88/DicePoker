@@ -16,7 +16,7 @@ class Program
         var rnd = new Random();
         int pool = 0;
 
-        pool = DiceDealer.Welcome(player, pool);
+        pool = DiceDealer.Welcome(player, opponent, pool);
         Console.WriteLine("Press enter to roll the dice.");
         Console.ReadKey();
         Console.WriteLine("Here is your hand...");
@@ -34,7 +34,7 @@ class Program
 
         DiceChecker.PrintHands(player.PlayerHand, opponent.OpponentHand);
         //second bet after the reroll rather than before?
-        DiceDealer.BettingPrompt(player, ref pool);
+        DiceDealer.BettingPrompt(player, opponent, ref pool);
         
         DiceDealer.RerollPrompt(player);
 
@@ -65,7 +65,7 @@ class Program
 
         DiceChecker.CheckHands(player, opponent);
 
-        Console.WriteLine($"{player.Coins} coins remaining.");
+        Console.WriteLine($"{player.PlayerCoins} coins remaining.");
         DiceDealer.ReplayPrompt(player, opponent);
     }
     //probably put these in dealer. or extension methods static class

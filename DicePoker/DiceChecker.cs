@@ -29,13 +29,14 @@ namespace DicePoker
         {
             if ((int)player.PlayerHand > (int)opponent.OpponentHand)
             {
-                Console.WriteLine($"Well done!");
-                player.PlayerWin();
+                //Console.WriteLine($"Well done!");
+                player.PlayerWin(opponent);
                 return true;
             }
             else if ((int)player.PlayerHand < (int)opponent.OpponentHand)
             {
-                Console.WriteLine($"Too bad...");
+                //Console.WriteLine($"Too bad...");
+                opponent.OpponentWin(player);
                 return false;
             }
             else return TieBreaker(player, opponent);
@@ -61,12 +62,13 @@ namespace DicePoker
             if (playerHighPair > opponentHighPair)
             {
                 Console.WriteLine($"Good job!");
-                player.PlayerWin();
+                player.PlayerWin(opponent);
                 return true;
             }
             else if (playerHighPair < opponentHighPair)
             {
                 Console.WriteLine($"Better luck next time...");
+                opponent.OpponentWin(player);
                 return false;
             }
             else return CheckLowPair(player, opponent);
@@ -80,12 +82,13 @@ namespace DicePoker
             if (playerLowPair > opponentLowPair)
             {
                 Console.WriteLine($"Nice!");
-                player.PlayerWin();
+                player.PlayerWin(opponent);
                 return true;
             }
             else if (playerLowPair < opponentLowPair)
             {
                 Console.WriteLine($"Crap...");
+                opponent.OpponentWin(player);
                 return false;
             }
             else return CheckKicker(player, opponent);
@@ -99,12 +102,13 @@ namespace DicePoker
             if (playerHighKicker > opponentHighKicker)
             {
                 Console.WriteLine($"Lucky!");
-                player.PlayerWin();
+                player.PlayerWin(opponent);
                 return true;
             }
             else if (playerHighKicker < opponentHighKicker)
             {
                 Console.WriteLine($"Close but not cigar...");
+                opponent.OpponentWin(player);
                 return false;
             }
             else

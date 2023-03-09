@@ -5,10 +5,11 @@ namespace DicePoker
 {
 	public static class DiceDealer
 	{
-        public static int Welcome(DicePlayer player, int pool)
+        public static int Welcome(DicePlayer player, DiceOpponent opponent, int pool)
         {
             //TODO:more player instructions
-            Console.WriteLine($"Welcome to dice poker. Place your starting bet.\nYou have {player.Coins} coins.\n1. 10 coins.\n2. 25 coins.\n3. 50 coins.");
+            Console.WriteLine($"Welcome to dice poker. Place your starting bet." +
+                $"\nYou have {player.PlayerCoins} coins.\n1. 10 coins.\n2. 25 coins.\n3. 50 coins.");
             string userInput;
             while (true)
             {
@@ -19,21 +20,21 @@ namespace DicePoker
                 }
                 else if(userInput == "1")
                 {
-                    player.Coins -= 10;
+                    player.PlayerBet(10, opponent);
                     pool += 20;
                     Console.WriteLine($"This round's pool starts off at {pool} coins.");
                     return pool;
                 }
                 else if(userInput == "2")
                 {
-                    player.Coins -= 25;
+                    player.PlayerBet(25, opponent);
                     pool += 50;
                     Console.WriteLine($"This round's pool starts off at {pool} coins.");
                     return pool;
                 }
                 else if(userInput == "3")
                 {
-                    player.Coins -= 50;
+                    player.PlayerBet(50, opponent);
                     pool += 100;
                     Console.WriteLine($"This round's pool starts off at {pool} coins.");
                     return pool;
@@ -101,7 +102,7 @@ namespace DicePoker
             return;
         }
 
-        public static void BettingPrompt(DicePlayer player, ref int pool)
+        public static void BettingPrompt(DicePlayer player, DiceOpponent opponent, ref int pool)
         {
             Console.WriteLine("Would you like to place a bet?\n1. Yes.\n2. No.");
             string userInput;
@@ -114,16 +115,17 @@ namespace DicePoker
                 }
                 else if (userInput == "1")
                 {
-                    DiceDealer.PlaceBet(player, ref pool);
+                    DiceDealer.PlaceBet(player, opponent, ref pool);
                     break;
                 }
                 else break;
             }
         }
 
-        public static DicePlayer PlaceBet(DicePlayer player, ref int pool)
+        public static DicePlayer PlaceBet(DicePlayer player, DiceOpponent opponent, ref int pool)
         {
-            Console.WriteLine($"Select amount of coins to bet. You currently have {player.Coins}:\n1. 10 coins.\n2. 25 coins.\n3. 50 coins.");
+            Console.WriteLine($"Select amount of coins to bet. You currently have {player.PlayerCoins}:" +
+                $"\n1. 10 coins.\n2. 25 coins.\n3. 50 coins.");
             string userInput;
             while (true)
             {
@@ -134,23 +136,23 @@ namespace DicePoker
                 }
                 else if (userInput == "1")
                 {
-                    player.Coins -= 10;
+                    player.PlayerBet(10, opponent);
                     pool += 20;
-                    Console.WriteLine($"Betting 10 coins. The pool has {pool} coins and your pockets now have {player.Coins}");
+                    Console.WriteLine($"{player.PlayerWager} coins is your total wager. The pool has {pool} coins and your pockets now have {player.PlayerCoins}");
                     return player;
                 }
                 else if (userInput == "2")
                 {
-                    player.Coins -= 25;
+                    player.PlayerBet(25, opponent);
                     pool += 50;
-                    Console.WriteLine($"Betting 25 coins. The pool has {pool} coins and your pockets now have {player.Coins}");
+                    Console.WriteLine($"{player.PlayerWager} coins is your total wager. The pool has {pool} coins and your pockets now have {player.PlayerCoins}");
                     return player;
                 }
                 else if (userInput == "3")
                 {
-                    player.Coins -= 50;
+                    player.PlayerBet(50, opponent);
                     pool += 100;
-                    Console.WriteLine($"Betting 50 coins. The pool has {pool} coins and your pockets now have {player.Coins}");
+                    Console.WriteLine($"{player.PlayerWager} coins is your total wager. The pool has {pool} coins and your pockets now have {player.PlayerCoins}");
                     return player;
                 }
             }
@@ -171,9 +173,9 @@ namespace DicePoker
                 else if (userInput == "1") Program.Game(player, opponent);
                 else
                 {
-                    //TODO: coins won/lost currently can send balance into negative
-                    //minus 500 here is to compensate for the starting balance
-                    Console.WriteLine($"Thank you for playing. You won {player.PlayerWins} game(s) and {player.Coins - 500} coins.");
+                    //minus 500 here is to compensate for the starting balance. "you won -500" on player loss
+                    //inconsistently closes the game or keeps it open sometimes...?
+                    Console.WriteLine($"Thank you for playing. You won {player.PlayerWins} game(s) and {player.PlayerCoins - 500} coins.");
                     break;
                 }
             }
