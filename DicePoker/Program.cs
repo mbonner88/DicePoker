@@ -18,7 +18,7 @@ class Program
 
         //pool = DiceDealer.Welcome(player, opponent, pool);
         DiceDealer.Welcome(player, opponent);
-        Console.WriteLine("Press enter to roll the dice.");
+        Console.WriteLine("Press any key to roll the dice.");
         Console.ReadKey();
         Console.WriteLine("Here is your hand...");
         

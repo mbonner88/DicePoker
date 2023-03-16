@@ -179,17 +179,22 @@ namespace DicePoker
                     Console.WriteLine("Invalid input. Please enter a 1 or a 2.");
                     continue;
                 }
-                else if (userInput == "1") Program.Game(player, opponent);
+                else if (userInput == "1")
+                {
+                    Program.Game(player, opponent);
+                    return;
+                }
                 else
                 {
                     //minus 500 here is to compensate for the starting balance. "you won -500" on loss
                     //TODO:does not properly exit after multiple games, takes as many "quit" prompts
                     Console.WriteLine($"Thank you for playing. You won {player.PlayerWins} game(s) and " +
                         $"{player.PlayerCoins - 500} coins.");
-                    break;
+                    Thread.Sleep(4000);
+                    return;
                 }
             }
-            return;
+            //return;
         }
     }
 }
