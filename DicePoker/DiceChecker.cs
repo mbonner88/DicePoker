@@ -107,7 +107,7 @@ namespace DicePoker
             }
             else if (playerHighKicker < opponentHighKicker)
             {
-                Console.WriteLine($"Close but not cigar...");
+                Console.WriteLine($"Close but no cigar...");
                 opponent.OpponentWin(player);
                 return false;
             }

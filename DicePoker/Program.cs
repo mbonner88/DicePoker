@@ -14,9 +14,10 @@ class Program
     {
         //TODO: add some Thread.Sleep
         var rnd = new Random();
-        int pool = 0;
+        //int pool = player.PlayerWager + opponent.OpponentWager;
 
-        pool = DiceDealer.Welcome(player, opponent, pool);
+        //pool = DiceDealer.Welcome(player, opponent, pool);
+        DiceDealer.Welcome(player, opponent);
         Console.WriteLine("Press enter to roll the dice.");
         Console.ReadKey();
         Console.WriteLine("Here is your hand...");
@@ -34,7 +35,7 @@ class Program
 
         DiceChecker.PrintHands(player.PlayerHand, opponent.OpponentHand);
         //second bet after the reroll rather than before?
-        DiceDealer.BettingPrompt(player, opponent, ref pool);
+        DiceDealer.BettingPrompt(player, opponent);
         
         DiceDealer.RerollPrompt(player);
 

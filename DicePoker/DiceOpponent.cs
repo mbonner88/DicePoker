@@ -30,7 +30,7 @@ namespace DicePoker
 
 		public void OpponentWin(DicePlayer player)
 		{
-			Console.WriteLine($"Opponent wins the round. They gain {player.PlayerWager} coins.");
+			Console.WriteLine($"Opponent wins the round. You lost {player.PlayerWager} coins.");
 			this.OpponentCoins += this.OpponentWager + player.PlayerWager;
 			player.PlayerWager = 0;
 			this.OpponentWager = 0;
