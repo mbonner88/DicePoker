@@ -3,9 +3,6 @@ namespace DicePoker
 {
 	public class DiceOpponent
 	{
-		/*store props here? dice, hand, coins, roundswon
-		 make class nonstatic, keep methods static*/
-		 
 		public int[]? OpponentDice { get; set; }
 		public DiceHand OpponentHand { get; set; }
 		public int OpponentCoins { get; set; } = 500;
@@ -72,6 +69,8 @@ namespace DicePoker
 		}
 
 		//TODO: opponent betting logic
+		//raise wager with a good hand that outweighs the player's
+		//fold when started off with nothing
 	}
 }
 

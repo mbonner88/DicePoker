@@ -113,7 +113,11 @@ namespace DicePoker
             }
             else
             {
-                Console.WriteLine($"Tie game");
+                Console.WriteLine($"Tie game. Refunding your wager of {player.PlayerWager} coins.");
+                player.PlayerCoins += player.PlayerWager;
+                player.PlayerWager = 0;
+                opponent.OpponentCoins += opponent.OpponentWager;
+                opponent.OpponentWager = 0;
                 return false;
             }
         }

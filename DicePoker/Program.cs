@@ -35,7 +35,7 @@ class Program
 
         DiceChecker.PrintHands(player.PlayerHand, opponent.OpponentHand);
         //second bet after the reroll rather than before?
-        DiceDealer.BettingPrompt(player, opponent);
+        if (DiceDealer.CheckCoinBalance(player)) { DiceDealer.BettingPrompt(player, opponent); }
         
         DiceDealer.RerollPrompt(player);
 
@@ -69,6 +69,7 @@ class Program
         Console.WriteLine($"{player.PlayerCoins} coins remaining.");
         DiceDealer.ReplayPrompt(player, opponent);
     }
+
     //probably put these in dealer. or extension methods static class
     public static string SeparateRerollString(string input)
     {

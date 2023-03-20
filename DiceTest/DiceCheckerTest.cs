@@ -3,7 +3,7 @@
 
 public class DiceCheckerTest
 {
-    //TODO: more tests here, create more test classes for dealer,
+    //TODO: more tests here, create new test class for dicedealer
     [Fact]
     public void CheckHandsTest()
     {

@@ -181,20 +181,50 @@ namespace DicePoker
                 }
                 else if (userInput == "1")
                 {
-                    Program.Game(player, opponent);
-                    return;
+                    if (CheckCoinBalance(player))
+                    {
+                        Program.Game(player, opponent);
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Sorry, looks like you can't afford another game.");
+                        CloseGame(player, opponent);
+                        return;
+                    }
                 }
                 else
                 {
-                    //minus 500 here is to compensate for the starting balance. "you won -500" on loss
-                    //TODO:does not properly exit after multiple games, takes as many "quit" prompts
-                    Console.WriteLine($"Thank you for playing. You won {player.PlayerWins} game(s) and " +
-                        $"{player.PlayerCoins - 500} coins.");
-                    Thread.Sleep(4000);
+                    CloseGame(player, opponent);
                     return;
                 }
             }
-            //return;
+        }
+
+        public static bool CheckCoinBalance(DicePlayer player)
+        {
+            if (player.PlayerCoins > 0) return true;
+            else return false;
+        }
+
+        public static void CloseGame(DicePlayer player, DiceOpponent opponent)
+        {
+            Console.WriteLine($"Thank you for playing dice poker!\nYou won {player.PlayerWins} games " +
+                $"against your opponent, and your opponent won {opponent.OpponentWins} games.");
+            Thread.Sleep(4000);
+            if(player.PlayerCoins > 500)
+            {
+                Console.WriteLine($"You made a net profit of {player.PlayerCoins - 500} coins, well done!");
+            }
+            else if(player.PlayerCoins < 500)
+            {
+                Console.WriteLine($"Unfortunately you lost {500 - player.PlayerCoins} coins today...");
+            }
+            else { Console.WriteLine($"Looks like you broke even on your winnings."); }
+            Thread.Sleep(4000);
+            Console.WriteLine($"Come back soon to play more dice poker! Have a great day.");
+            Thread.Sleep(4000);
+            return;
         }
     }
 }
