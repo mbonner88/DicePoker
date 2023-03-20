@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using Extensions;
 
 namespace DicePoker
 {
@@ -90,7 +91,7 @@ namespace DicePoker
                             continue;
                         }
                     }
-                    Console.WriteLine($"Rerolling dice {Program.SeparateRerollString(rerollInput)}");
+                    Console.WriteLine($"Rerolling dice {rerollInput.SeparateRerollString()}");
                     player.PlayerDice = DiceDealer.RerollDice(rerollInput, player.PlayerDice, new Random());
                     Console.WriteLine("Your new hand...");
                     DiceChecker.PrintDice(player.PlayerDice);

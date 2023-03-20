@@ -5,7 +5,7 @@ namespace DicePoker
     {
         public int[] PlayerDice { get; set; }
         public DiceHand PlayerHand { get; set; }
-        public int PlayerCoins { get; set; } = 100;
+        public int PlayerCoins { get; set; } = 500;
         public int PlayerWager { get; set; }
         public int PlayerWins { get; set; }
 

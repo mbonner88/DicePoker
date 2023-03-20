@@ -1,4 +1,6 @@
 ﻿using System;
+using Extensions;
+
 namespace DicePoker
 {
     public static class DiceChecker
@@ -44,8 +46,8 @@ namespace DicePoker
 
         public static void PrintHands(DiceHand playerHand, DiceHand opponentHand)
         {
-            Console.WriteLine($"Your hand: {Program.SeparateDiceHandString(playerHand)}");
-            Console.WriteLine($"Opponent's hand: {Program.SeparateDiceHandString(opponentHand)}");
+            Console.WriteLine($"Your hand: {playerHand.SeparateDiceHandString()}");
+            Console.WriteLine($"Opponent's hand: {opponentHand.SeparateDiceHandString()}");
         }
 
         //TieBreaker

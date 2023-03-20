@@ -1,4 +1,6 @@
 ﻿using System;
+using Extensions;
+
 namespace DicePoker
 {
 	public class DiceOpponent
@@ -44,7 +46,7 @@ namespace DicePoker
 				{
 					rerollInput += Array.IndexOf(dice, die) + 1;
 				}
-				Console.WriteLine($"Opponent rerolling dice {Program.SeparateRerollString(rerollInput)}");
+				Console.WriteLine($"Opponent rerolling dice {rerollInput.SeparateRerollString()}");
 				int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
 				Console.WriteLine("Opponent's new hand...");
 				DiceChecker.PrintDice(newDice);
