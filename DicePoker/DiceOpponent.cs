@@ -62,47 +62,12 @@ namespace DicePoker
             DiceChecker.PrintDice(newDice);
             Thread.Sleep(1000);
             return newDice;
-            //         if ((int)hand < 4)
-            //{
-            //	string rerollInput = "";
-            //	var rerollDice = dice.GroupBy(x => x).Where(x=>x.Count() == 1).Select(x=>x.Key);
-            //	foreach(var die in rerollDice)
-            //	{
-            //		rerollInput += Array.IndexOf(dice, die) + 1;
-            //	}
-            //	Console.WriteLine($"Opponent rerolling dice {rerollInput.SeparateRerollString()}");
-            //             Thread.Sleep(1000);
-            //             int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
-            //	Console.WriteLine("Opponent's new hand...");
-            //             Thread.Sleep(1000);
-            //             DiceChecker.PrintDice(newDice);
-            //             Thread.Sleep(1000);
-            //             return newDice;
-            //}
-            //else if ((int)hand == 7)
-            //{
-            //             string rerollInput = "";
-            //             var rerollDice = dice.GroupBy(x => x).Where(x => x.Count() == 1).Select(x => x.Key);
-            //             foreach (var die in rerollDice)
-            //             {
-            //                 rerollInput += Array.IndexOf(dice, die) + 1;
-            //             }
-            //             Console.WriteLine($"Opponent rerolling die {rerollInput}");
-            //             Thread.Sleep(1000);
-            //             int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
-            //             Console.WriteLine("Opponent's new hand...");
-            //             Thread.Sleep(1000);
-            //             DiceChecker.PrintDice(newDice);
-            //             Thread.Sleep(1000);
-            //             return newDice;
-            //         }
+            
             //two of a kind logic, discard lower pair if player hand is stronger, else keep both pairs
-
         }
 
 		//TODO: opponent betting logic
-		//raise wager with a good hand that outweighs the player's
-		//fold when started off with nothing
+		//must add raising and folding features to do this
 	}
 }
 

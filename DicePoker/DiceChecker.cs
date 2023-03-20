@@ -20,25 +20,22 @@ namespace DicePoker
 
         public static void PrintDice(int[] dice)
         {
-            //display dice horizontally
+            //TODO:display dice horizontally
             for (int i = 0; i < dice.Length; i++)
             {
                 Console.WriteLine("{0,40}", $"Die {i + 1} : {dice[i]}");
             }
         }
-
-        //CheckHands
+        
         public static bool CheckHands(DicePlayer player, DiceOpponent opponent)
         {
             if ((int)player.PlayerHand > (int)opponent.OpponentHand)
             {
-                //Console.WriteLine($"Well done!");
                 player.PlayerWin(opponent);
                 return true;
             }
             else if ((int)player.PlayerHand < (int)opponent.OpponentHand)
             {
-                //Console.WriteLine($"Too bad...");
                 opponent.OpponentWin(player);
                 return false;
             }
@@ -51,13 +48,11 @@ namespace DicePoker
             Console.WriteLine($"Opponent's hand: {opponentHand.SeparateDiceHandString()}");
         }
 
-        //TieBreaker
         public static bool TieBreaker(DicePlayer player, DiceOpponent opponent)
         {
             return CheckHighPair(player, opponent);
         }
 
-        //CheckHighPair
         public static bool CheckHighPair(DicePlayer player, DiceOpponent opponent)
         {
             var playerHighPair = player.PlayerDice.GroupBy(x => x).Where(g => g.Count() > 1).Select(g => g.Key).Max();
@@ -77,7 +72,6 @@ namespace DicePoker
             else return CheckLowPair(player, opponent);
         }
 
-        //CheckLowPair
         public static bool CheckLowPair(DicePlayer player, DiceOpponent opponent)
         {
             var playerLowPair = player.PlayerDice.GroupBy(x => x).Where(g => g.Count() > 1).Select(g => g.Key).Min();
@@ -97,7 +91,6 @@ namespace DicePoker
             else return CheckKicker(player, opponent);
         }
 
-        //CheckKicker
         public static bool CheckKicker(DicePlayer player, DiceOpponent opponent)
         {
             var playerHighKicker = player.PlayerDice.GroupBy(x => x).Where(g => g.Count() == 1).Select(g => g.Key).Max();
@@ -117,6 +110,7 @@ namespace DicePoker
             else
             {
                 Console.WriteLine($"Tie game. Refunding your wager of {player.PlayerWager} coins.");
+                Thread.Sleep(1000);
                 player.PlayerCoins += player.PlayerWager;
                 player.PlayerWager = 0;
                 opponent.OpponentCoins += opponent.OpponentWager;

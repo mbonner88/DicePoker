@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-
 namespace DicePoker;
 class Program
 {
@@ -12,11 +11,7 @@ class Program
 
     public static void Game(DicePlayer player, DiceOpponent opponent)
     {
-        //TODO: add some Thread.Sleep
         var rnd = new Random();
-        //int pool = player.PlayerWager + opponent.OpponentWager;
-
-        //pool = DiceDealer.Welcome(player, opponent, pool);
         DiceDealer.Welcome(player, opponent);
         Thread.Sleep(1000);
         Console.WriteLine("Press any key to roll the dice.");
@@ -40,79 +35,21 @@ class Program
 
         DiceChecker.PrintHands(player.PlayerHand, opponent.OpponentHand);
         Thread.Sleep(1000);
-        //second bet after the reroll rather than before?
-        if (DiceDealer.CheckCoinBalance(player)) { DiceDealer.BettingPrompt(player, opponent); }
         
+        if (DiceDealer.CheckCoinBalance(player)) { DiceDealer.BettingPrompt(player, opponent); }
         DiceDealer.RerollPrompt(player);
         Thread.Sleep(1000);
 
         Console.WriteLine("Opponent's turn...");
         Thread.Sleep(1000);
+
         opponent.OpponentDice = DiceOpponent.OpponentReroll(opponent.OpponentDice, opponent.OpponentHand);
         opponent.OpponentHand = DiceChecker.CheckDice(opponent.OpponentDice);
-
         DiceChecker.PrintHands(player.PlayerHand, opponent.OpponentHand);
-
-        //write a method for dicechecker.checkhands?
-        //if ((int)player.PlayerHand > (int)opponent.OpponentHand)
-        //{
-        //    player.PlayerWins++;
-        //    player.Coins += pool;
-        //    Console.WriteLine($"You've won! {pool} coins added!");
-        //}
-        //else if ((int)player.PlayerHand < (int)opponent.OpponentHand)
-        //{
-        //    opponent.OpponentWins++;
-        //    Console.WriteLine($"You've lost... {pool} coins awarded to your opponent.");
-        //}
-        ////
-        //else
-        //{
-        //    player.Coins += pool / 2;
-        //    Console.WriteLine($"The match ends in a draw. {pool / 2} coins refunded.");
-        //}
-
         DiceChecker.CheckHands(player, opponent);
 
         Console.WriteLine($"{player.PlayerCoins} coins remaining.");
+        Thread.Sleep(1000);
         DiceDealer.ReplayPrompt(player, opponent);
     }
-
-    //probably put these in dealer. or extension methods static class
-    //public static string SeparateRerollString(string input)
-    //{
-    //    string output = "";
-    //    var chars = input.ToCharArray();
-    //    if (input.Length > 2)
-    //    {
-    //        foreach (var c in chars)
-    //        {
-    //            if (Array.IndexOf(chars, c) == chars.Length - 1) output += "and " + c;
-    //            else output += c + ", ";
-    //        }
-    //        return output;
-    //    }
-    //    else if (input.Length == 2)
-    //    {
-    //        return input.Insert(1, " and ");
-    //    }
-    //    else return input;
-    //}
-
-    //public static string SeparateDiceHandString(DiceHand hand)
-    //{
-    //    if ((int)hand < 2) return hand.ToString();
-    //    var str = hand.ToString();
-    //    var chars = hand.ToString().ToCharArray();
-    //    int count = 0;
-    //    for(int i = 1; i < chars.Length; i++)
-    //    {
-    //        if (char.IsUpper(chars[i]))
-    //        {
-    //            str = str.Insert(i + count, " ");
-    //            count++;
-    //        }
-    //    }
-    //    return str;
-    //}
 }
