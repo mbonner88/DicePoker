@@ -8,7 +8,7 @@ namespace DicePoker
 	{
         public static void Welcome(DicePlayer player, DiceOpponent opponent)
         {
-            //TODO:more player instructions. simplify phrasing
+            //TODO:more player instructions. simplify phrasing, word wrapping
             Console.WriteLine($"Welcome to dice poker! Place your starting bet:" +
                 $"\nYou have {player.PlayerCoins} coins.\n1. 10 coins.\n2. 25 coins.\n3. 50 coins.");
             string userInput;
@@ -23,7 +23,7 @@ namespace DicePoker
                 {
                     player.PlayerBet(10, opponent);
                     //pool += 20;
-                    Console.WriteLine($"This round's pool starts off at " +
+                    Console.WriteLine($"This round's pot starts off at " +
                         $"{player.PlayerWager + opponent.OpponentWager} coins.");
                     return;
                 }
@@ -31,7 +31,7 @@ namespace DicePoker
                 {
                     player.PlayerBet(25, opponent);
                     //pool += 50;
-                    Console.WriteLine($"This round's pool starts off at " +
+                    Console.WriteLine($"This round's pot starts off at " +
                         $"{player.PlayerWager + opponent.OpponentWager} coins.");
                     return;
                 }
@@ -39,7 +39,7 @@ namespace DicePoker
                 {
                     player.PlayerBet(50, opponent);
                     //pool += 100;
-                    Console.WriteLine($"This round's pool starts off at " +
+                    Console.WriteLine($"This round's pot starts off at " +
                         $"{player.PlayerWager + opponent.OpponentWager} coins.");
                     return;
                 }                
@@ -143,7 +143,7 @@ namespace DicePoker
                     player.PlayerBet(10, opponent);
                     //pool += 20;
                     Console.WriteLine($"{player.PlayerWager} coins is your total wager. " +
-                        $"The pool has {player.PlayerWager + opponent.OpponentWager} coins and your " +
+                        $"The pot has {player.PlayerWager + opponent.OpponentWager} coins and your " +
                         $"pockets now have {player.PlayerCoins}");
                     return player;
                 }
@@ -152,7 +152,7 @@ namespace DicePoker
                     player.PlayerBet(25, opponent);
                     //pool += 50;
                     Console.WriteLine($"{player.PlayerWager} coins is your total wager. " +
-                        $"The pool has {player.PlayerWager + opponent.OpponentWager} coins and your " +
+                        $"The pot has {player.PlayerWager + opponent.OpponentWager} coins and your " +
                         $"pockets now have {player.PlayerCoins}");
                     return player;
                 }
@@ -161,7 +161,7 @@ namespace DicePoker
                     player.PlayerBet(50, opponent);
                     //pool += 100;
                     Console.WriteLine($"{player.PlayerWager} coins is your total wager. " +
-                        $"The pool has {player.PlayerWager + opponent.OpponentWager} coins and your " +
+                        $"The pot has {player.PlayerWager + opponent.OpponentWager} coins and your " +
                         $"pockets now have {player.PlayerCoins}");
                     return player;
                 }
