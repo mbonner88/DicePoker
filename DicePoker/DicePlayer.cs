@@ -15,6 +15,7 @@ namespace DicePoker
             {
                 Console.WriteLine($"Insufficient coins...\nBetting your remaining {this.PlayerCoins} coins.");
                 this.PlayerWager += this.PlayerCoins;
+                Thread.Sleep(1000);
                 opponent.OpponentBet(this.PlayerCoins);
                 this.PlayerCoins = 0;
             }
@@ -23,6 +24,7 @@ namespace DicePoker
                 Console.WriteLine($"Betting {amount} coins.");
                 this.PlayerWager += amount;
                 this.PlayerCoins -= amount;
+                Thread.Sleep(1000);
                 opponent.OpponentBet(amount);
             }
         }
@@ -30,6 +32,7 @@ namespace DicePoker
         public void PlayerWin(DiceOpponent opponent)
         {
             Console.WriteLine($"You won the round! {opponent.OpponentWager} coins gained.");
+            Thread.Sleep(1000);
             this.PlayerCoins += this.PlayerWager + opponent.OpponentWager;
             this.PlayerWager = 0;
             opponent.OpponentWager = 0;

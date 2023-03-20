@@ -22,7 +22,6 @@ namespace DicePoker
                 else if(userInput == "1")
                 {
                     player.PlayerBet(10, opponent);
-                    //pool += 20;
                     Console.WriteLine($"This round's pot starts off at " +
                         $"{player.PlayerWager + opponent.OpponentWager} coins.");
                     return;
@@ -30,7 +29,6 @@ namespace DicePoker
                 else if(userInput == "2")
                 {
                     player.PlayerBet(25, opponent);
-                    //pool += 50;
                     Console.WriteLine($"This round's pot starts off at " +
                         $"{player.PlayerWager + opponent.OpponentWager} coins.");
                     return;
@@ -38,7 +36,6 @@ namespace DicePoker
                 else if(userInput == "3")
                 {
                     player.PlayerBet(50, opponent);
-                    //pool += 100;
                     Console.WriteLine($"This round's pot starts off at " +
                         $"{player.PlayerWager + opponent.OpponentWager} coins.");
                     return;
@@ -92,8 +89,10 @@ namespace DicePoker
                         }
                     }
                     Console.WriteLine($"Rerolling dice {rerollInput.SeparateRerollString()}");
+                    Thread.Sleep(1000);
                     player.PlayerDice = DiceDealer.RerollDice(rerollInput, player.PlayerDice, new Random());
                     Console.WriteLine("Your new hand...");
+                    Thread.Sleep(1000);
                     DiceChecker.PrintDice(player.PlayerDice);
                     player.PlayerHand = DiceChecker.CheckDice(player.PlayerDice);
                     break;
@@ -120,6 +119,7 @@ namespace DicePoker
                 else if (userInput == "1")
                 {
                     DiceDealer.PlaceBet(player, opponent);
+                    Thread.Sleep(1000);
                     break;
                 }
                 else break;
@@ -141,7 +141,6 @@ namespace DicePoker
                 else if (userInput == "1")
                 {
                     player.PlayerBet(10, opponent);
-                    //pool += 20;
                     Console.WriteLine($"{player.PlayerWager} coins is your total wager. " +
                         $"The pot has {player.PlayerWager + opponent.OpponentWager} coins and your " +
                         $"pockets now have {player.PlayerCoins}");
@@ -150,7 +149,6 @@ namespace DicePoker
                 else if (userInput == "2")
                 {
                     player.PlayerBet(25, opponent);
-                    //pool += 50;
                     Console.WriteLine($"{player.PlayerWager} coins is your total wager. " +
                         $"The pot has {player.PlayerWager + opponent.OpponentWager} coins and your " +
                         $"pockets now have {player.PlayerCoins}");
@@ -159,7 +157,6 @@ namespace DicePoker
                 else if (userInput == "3")
                 {
                     player.PlayerBet(50, opponent);
-                    //pool += 100;
                     Console.WriteLine($"{player.PlayerWager} coins is your total wager. " +
                         $"The pot has {player.PlayerWager + opponent.OpponentWager} coins and your " +
                         $"pockets now have {player.PlayerCoins}");
@@ -189,7 +186,8 @@ namespace DicePoker
                     }
                     else
                     {
-                        Console.WriteLine($"Sorry, looks like you can't afford another game.");
+                        Console.WriteLine($"Sorry, it looks like you can't afford another game.");
+                        Thread.Sleep(1000);
                         CloseGame(player, opponent);
                         return;
                     }
@@ -210,8 +208,8 @@ namespace DicePoker
 
         public static void CloseGame(DicePlayer player, DiceOpponent opponent)
         {
-            Console.WriteLine($"Thank you for playing dice poker!\nYou won {player.PlayerWins} games " +
-                $"against your opponent, and your opponent won {opponent.OpponentWins} games.");
+            Console.WriteLine($"Thank you for playing dice poker!\nYou won {player.PlayerWins} game(s) " +
+                $"against your opponent, and your opponent won {opponent.OpponentWins} game(s).");
             Thread.Sleep(4000);
             if(player.PlayerCoins > 500)
             {

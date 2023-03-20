@@ -18,28 +18,36 @@ class Program
 
         //pool = DiceDealer.Welcome(player, opponent, pool);
         DiceDealer.Welcome(player, opponent);
+        Thread.Sleep(1000);
         Console.WriteLine("Press any key to roll the dice.");
         Console.ReadKey();
         Console.WriteLine("Here is your hand...");
-        
+        Thread.Sleep(1000);
+
         player.PlayerDice = DiceDealer.RollDice(rnd).ToArray();
         player.PlayerHand = DiceChecker.CheckDice(player.PlayerDice);
         DiceChecker.PrintDice(player.PlayerDice);
         Console.WriteLine();
+        Thread.Sleep(1000);
 
         Console.WriteLine("And your opponent's hand...");
+        Thread.Sleep(1000);
         opponent.OpponentDice = DiceDealer.RollDice(rnd).ToArray();
         opponent.OpponentHand = DiceChecker.CheckDice(opponent.OpponentDice);
         DiceChecker.PrintDice(opponent.OpponentDice);
         Console.WriteLine();
+        Thread.Sleep(1000);
 
         DiceChecker.PrintHands(player.PlayerHand, opponent.OpponentHand);
+        Thread.Sleep(1000);
         //second bet after the reroll rather than before?
         if (DiceDealer.CheckCoinBalance(player)) { DiceDealer.BettingPrompt(player, opponent); }
         
         DiceDealer.RerollPrompt(player);
+        Thread.Sleep(1000);
 
         Console.WriteLine("Opponent's turn...");
+        Thread.Sleep(1000);
         opponent.OpponentDice = DiceOpponent.OpponentReroll(opponent.OpponentDice, opponent.OpponentHand);
         opponent.OpponentHand = DiceChecker.CheckDice(opponent.OpponentDice);
 

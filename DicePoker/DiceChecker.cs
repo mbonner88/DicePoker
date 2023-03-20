@@ -20,6 +20,7 @@ namespace DicePoker
 
         public static void PrintDice(int[] dice)
         {
+            //display dice horizontally
             for (int i = 0; i < dice.Length; i++)
             {
                 Console.WriteLine("{0,40}", $"Die {i + 1} : {dice[i]}");

@@ -16,13 +16,15 @@ namespace DicePoker
 			if (amount > this.OpponentCoins)
 			{
 				Console.WriteLine($"Opponent cannot call your bet...\nOpponent betting {this.OpponentCoins} coins.");
-				this.OpponentWager += this.OpponentCoins;
+                Thread.Sleep(1000);
+                this.OpponentWager += this.OpponentCoins;
 				this.OpponentCoins = 0;
 			}
 			else
 			{
 				Console.WriteLine($"Opponent betting {amount} coins.");
-				this.OpponentWager += amount;
+                Thread.Sleep(1000);
+                this.OpponentWager += amount;
 				this.OpponentCoins -= amount;
 			}
 		}
@@ -30,7 +32,8 @@ namespace DicePoker
 		public void OpponentWin(DicePlayer player)
 		{
 			Console.WriteLine($"Opponent wins the round. You lost {player.PlayerWager} coins.");
-			this.OpponentCoins += this.OpponentWager + player.PlayerWager;
+            Thread.Sleep(1000);
+            this.OpponentCoins += this.OpponentWager + player.PlayerWager;
 			player.PlayerWager = 0;
 			this.OpponentWager = 0;
 			this.OpponentWins++;
@@ -38,37 +41,64 @@ namespace DicePoker
 
 		public static int[] OpponentReroll(int[] dice, DiceHand hand)
 		{
-			if((int)hand < 4)
+			if ((int)hand >= 4 && (int)hand != 7)
 			{
-				string rerollInput = "";
-				var rerollDice = dice.GroupBy(x => x).Where(x=>x.Count() == 1).Select(x=>x.Key);
-				foreach(var die in rerollDice)
-				{
-					rerollInput += Array.IndexOf(dice, die) + 1;
-				}
-				Console.WriteLine($"Opponent rerolling dice {rerollInput.SeparateRerollString()}");
-				int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
-				Console.WriteLine("Opponent's new hand...");
-				DiceChecker.PrintDice(newDice);
-				return newDice;
+				Console.WriteLine("Opponent declined rerolling any dice.");
+				Thread.Sleep(1000);
+				return dice;
 			}
-			else if ((int)hand == 7)
-			{
-                string rerollInput = "";
-                var rerollDice = dice.GroupBy(x => x).Where(x => x.Count() == 1).Select(x => x.Key);
-                foreach (var die in rerollDice)
-                {
-                    rerollInput += Array.IndexOf(dice, die) + 1;
-                }
-                Console.WriteLine($"Opponent rerolling die {rerollInput}");
-                int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
-                Console.WriteLine("Opponent's new hand...");
-                DiceChecker.PrintDice(newDice);
-                return newDice;
+            string rerollInput = "";
+            var rerollDice = dice.GroupBy(x => x).Where(x => x.Count() == 1).Select(x => x.Key);
+            foreach (var die in rerollDice)
+            {
+                rerollInput += Array.IndexOf(dice, die) + 1;
             }
-			Console.WriteLine("Opponent declined rerolling any dice.");
-			return dice;
-		}
+            if (rerollInput.Length == 1) Console.WriteLine($"Opponent rerolling die {rerollInput}");
+            else Console.WriteLine($"Opponent rerolling dice {rerollInput.SeparateRerollString()}");
+            Thread.Sleep(1000);
+            int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
+            Console.WriteLine("Opponent's new hand...");
+            Thread.Sleep(1000);
+            DiceChecker.PrintDice(newDice);
+            Thread.Sleep(1000);
+            return newDice;
+            //         if ((int)hand < 4)
+            //{
+            //	string rerollInput = "";
+            //	var rerollDice = dice.GroupBy(x => x).Where(x=>x.Count() == 1).Select(x=>x.Key);
+            //	foreach(var die in rerollDice)
+            //	{
+            //		rerollInput += Array.IndexOf(dice, die) + 1;
+            //	}
+            //	Console.WriteLine($"Opponent rerolling dice {rerollInput.SeparateRerollString()}");
+            //             Thread.Sleep(1000);
+            //             int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
+            //	Console.WriteLine("Opponent's new hand...");
+            //             Thread.Sleep(1000);
+            //             DiceChecker.PrintDice(newDice);
+            //             Thread.Sleep(1000);
+            //             return newDice;
+            //}
+            //else if ((int)hand == 7)
+            //{
+            //             string rerollInput = "";
+            //             var rerollDice = dice.GroupBy(x => x).Where(x => x.Count() == 1).Select(x => x.Key);
+            //             foreach (var die in rerollDice)
+            //             {
+            //                 rerollInput += Array.IndexOf(dice, die) + 1;
+            //             }
+            //             Console.WriteLine($"Opponent rerolling die {rerollInput}");
+            //             Thread.Sleep(1000);
+            //             int[] newDice = DiceDealer.RerollDice(rerollInput, dice, new Random());
+            //             Console.WriteLine("Opponent's new hand...");
+            //             Thread.Sleep(1000);
+            //             DiceChecker.PrintDice(newDice);
+            //             Thread.Sleep(1000);
+            //             return newDice;
+            //         }
+            //two of a kind logic, discard lower pair if player hand is stronger, else keep both pairs
+
+        }
 
 		//TODO: opponent betting logic
 		//raise wager with a good hand that outweighs the player's
