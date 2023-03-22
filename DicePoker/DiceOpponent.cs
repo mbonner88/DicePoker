@@ -5,7 +5,7 @@ namespace DicePoker
 {
 	public class DiceOpponent
 	{
-		public int[]? OpponentDice { get; set; }
+		public int[] OpponentDice { get; set; }
 		public DiceHand OpponentHand { get; set; }
 		public int OpponentCoins { get; set; } = 500;
 		public int OpponentWager { get; set; }

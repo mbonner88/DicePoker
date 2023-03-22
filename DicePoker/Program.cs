@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+
 namespace DicePoker;
 class Program
 {
@@ -46,7 +47,7 @@ class Program
         opponent.OpponentDice = DiceOpponent.OpponentReroll(opponent.OpponentDice, opponent.OpponentHand);
         opponent.OpponentHand = DiceChecker.CheckDice(opponent.OpponentDice);
         DiceChecker.PrintHands(player.PlayerHand, opponent.OpponentHand);
-        DiceChecker.CheckHands(player, opponent);
+        DiceChecker.DeclareWinner(player, opponent);
 
         Console.WriteLine($"{player.PlayerCoins} coins remaining.");
         Thread.Sleep(1000);
