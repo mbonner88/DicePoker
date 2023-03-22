@@ -27,19 +27,19 @@ namespace DicePoker
             }
         }
         
-        public static bool CheckHands(DicePlayer player, DiceOpponent opponent)
+        public static void DeclareWinner(DicePlayer player, DiceOpponent opponent)
         {
             if ((int)player.PlayerHand > (int)opponent.OpponentHand)
             {
                 player.PlayerWin(opponent);
-                return true;
+                return;
             }
             else if ((int)player.PlayerHand < (int)opponent.OpponentHand)
             {
                 opponent.OpponentWin(player);
-                return false;
+                return;
             }
-            else return TieBreaker(player, opponent);
+            else CheckLowPair(player, opponent);
         }
 
         public static void PrintHands(DiceHand playerHand, DiceHand opponentHand)
@@ -48,12 +48,12 @@ namespace DicePoker
             Console.WriteLine($"Opponent's hand: {opponentHand.SeparateDiceHandString()}");
         }
 
-        public static bool TieBreaker(DicePlayer player, DiceOpponent opponent)
-        {
-            return CheckHighPair(player, opponent);
-        }
+        //public static void TieBreaker(DicePlayer player, DiceOpponent opponent)
+        //{
+        //    return CheckHighPair(player, opponent);
+        //}
 
-        public static bool CheckHighPair(DicePlayer player, DiceOpponent opponent)
+        public static void CheckHighPair(DicePlayer player, DiceOpponent opponent)
         {
             var playerHighPair = player.PlayerDice.GroupBy(x => x).Where(g => g.Count() > 1).Select(g => g.Key).Max();
             var opponentHighPair = opponent.OpponentDice.GroupBy(x => x).Where(g => g.Count() > 1).Select(g => g.Key).Max();
@@ -61,18 +61,18 @@ namespace DicePoker
             {
                 Console.WriteLine($"Good job!");
                 player.PlayerWin(opponent);
-                return true;
+                return;
             }
             else if (playerHighPair < opponentHighPair)
             {
                 Console.WriteLine($"Better luck next time...");
                 opponent.OpponentWin(player);
-                return false;
+                return;
             }
-            else return CheckLowPair(player, opponent);
+            else CheckLowPair(player, opponent);
         }
 
-        public static bool CheckLowPair(DicePlayer player, DiceOpponent opponent)
+        public static void CheckLowPair(DicePlayer player, DiceOpponent opponent)
         {
             var playerLowPair = player.PlayerDice.GroupBy(x => x).Where(g => g.Count() > 1).Select(g => g.Key).Min();
             var opponentLowPair = opponent.OpponentDice.GroupBy(x => x).Where(g => g.Count() > 1).Select(g => g.Key).Min();
@@ -80,18 +80,18 @@ namespace DicePoker
             {
                 Console.WriteLine($"Nice!");
                 player.PlayerWin(opponent);
-                return true;
+                return;
             }
             else if (playerLowPair < opponentLowPair)
             {
                 Console.WriteLine($"Crap...");
                 opponent.OpponentWin(player);
-                return false;
+                return;
             }
-            else return CheckKicker(player, opponent);
+            else CheckKicker(player, opponent);
         }
 
-        public static bool CheckKicker(DicePlayer player, DiceOpponent opponent)
+        public static void CheckKicker(DicePlayer player, DiceOpponent opponent)
         {
             var playerHighKicker = player.PlayerDice.GroupBy(x => x).Where(g => g.Count() == 1).Select(g => g.Key).Max();
             var opponentHighKicker = opponent.OpponentDice.GroupBy(x => x).Where(g => g.Count() == 1).Select(g => g.Key).Max();
@@ -99,13 +99,13 @@ namespace DicePoker
             {
                 Console.WriteLine($"Lucky!");
                 player.PlayerWin(opponent);
-                return true;
+                return;
             }
             else if (playerHighKicker < opponentHighKicker)
             {
                 Console.WriteLine($"Close but no cigar...");
                 opponent.OpponentWin(player);
-                return false;
+                return;
             }
             else
             {
@@ -115,7 +115,7 @@ namespace DicePoker
                 player.PlayerWager = 0;
                 opponent.OpponentCoins += opponent.OpponentWager;
                 opponent.OpponentWager = 0;
-                return false;
+                return;
             }
         }
 
